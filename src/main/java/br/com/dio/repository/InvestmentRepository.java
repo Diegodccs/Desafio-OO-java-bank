@@ -78,6 +78,8 @@ public class InvestmentRepository {
     public List<InvestmentWallet> listWallets(){
         return this.wallets;
     }
-
+    public List<Investment> list(){
+        return this.investments;
+    }
 
 }
