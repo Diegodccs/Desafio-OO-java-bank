@@ -4,19 +4,22 @@ import br.com.dio.expcetion.AccountNotFoundException;
 import br.com.dio.expcetion.PixUseException;
 import br.com.dio.model.AccountWallet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.dio.repository.CommonsRepository.checkFundsForTransaction;
 
 public class AccountRepository {
 
-    private List<AccountWallet> accounts;
+    private final List<AccountWallet> accounts = new ArrayList<>();
 
     public AccountWallet create(final List<String> pix, final long initialFunds){
-        var pixInUser = accounts.stream().flatMap(a -> a.getPix().stream()). toList();
-        for (var p : pix){
-            if (pixInUser.contains(p)){
-                throw new PixUseException("O pix" + p +"já está em uso");
+        if (!accounts.isEmpty()) {
+            var pixInUser = accounts.stream().flatMap(a -> a.getPix().stream()).toList();
+            for (var p : pix) {
+                if (pixInUser.contains(p)) {
+                    throw new PixUseException("O pix" + p + "já está em uso");
+                }
             }
         }
         var newAccount = new AccountWallet(initialFunds, pix);
@@ -24,9 +27,9 @@ public class AccountRepository {
         return newAccount;
     }
 
-    public void deposit(final String pix, final long fundsAmout){
+    public void deposit(final String pix, final long fundsAmount){
         var target = findByPix(pix);
-        target.addMoney(fundsAmout, "depósito");
+        target.addMoney(fundsAmount, "depósito");
     }
 
     public long withdraw(final String pix, final long amount){
