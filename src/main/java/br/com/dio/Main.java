@@ -37,7 +37,7 @@ public class Main {
             System.out.println("10 - Listar investimentos");
             System.out.println("11 - Listar carteiras de investimentos");
             System.out.println("12 - Atualizar investimentos");
-            System.out.println("13 - Historico de contas");
+         //   System.out.println("13 - Historico de contas");
             System.out.println("14 - Sair");
             var option = scanner.nextInt();
             switch (option) {
@@ -56,7 +56,7 @@ public class Main {
                     investmentRepository.updateAmount();
                     System.out.println("Investimentos reajustados");
                 }
-                case 13 -> checkHistory();
+               // case 13 -> checkHistory();
                 case 14 -> System.exit(0);
                 default -> System.out.println("Opção inválida");
 
@@ -152,7 +152,7 @@ public class Main {
         }
     }
 
-    private static void checkHistory(){
+  /*  private static void checkHistory(){
         System.out.println("Informe a chave pix da conta para verificar extrato: ");
         var pix = scanner.next();
         AccountWallet wallet;
@@ -167,6 +167,6 @@ public class Main {
         } catch (AccountNotFoundException ex){
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
 
 }
